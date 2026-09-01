@@ -86,6 +86,7 @@ const nextConfig: NextConfig = {
       externals.push({
         "@node-rs/argon2": "commonjs @node-rs/argon2",
         "@node-rs/argon2-win32-x64-msvc": "commonjs @node-rs/argon2-win32-x64-msvc",
+        "@node-rs/argon2-linux-x64-gnu": "commonjs @node-rs/argon2-linux-x64-gnu",
       });
       config.externals = externals;
       // MongoDB driver's optional auth/compression backends — never
