@@ -8,8 +8,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 loadEnv({ path: path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../.env") });
 
-import { randomBytes } from "node:crypto";
-import { argon2id } from "hash-wasm";
+import bcrypt from "bcryptjs";
 import { getEnv } from "@san/core/env";
 import { connectDb, mongoose, UserModel, getSettings } from "../index";
 
@@ -21,15 +20,7 @@ async function main() {
   if (existing) {
     console.log(`Admin ${env.ADMIN_SEED_EMAIL} already exists — skipping.`);
   } else {
-    const passwordHash = await argon2id({
-      password: env.ADMIN_SEED_PASSWORD,
-      salt: randomBytes(16),
-      memorySize: 19456,
-      iterations: 2,
-      parallelism: 1,
-      hashLength: 32,
-      outputType: "encoded",
-    });
+    const passwordHash = await bcrypt.hash(env.ADMIN_SEED_PASSWORD, 12);
     await UserModel.create({
       email: env.ADMIN_SEED_EMAIL,
       passwordHash,

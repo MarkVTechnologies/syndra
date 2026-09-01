@@ -14,8 +14,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 loadEnv({ path: path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../.env") });
 
-import { randomBytes } from "node:crypto";
-import { argon2id } from "hash-wasm";
+import bcrypt from "bcryptjs";
 import {
   connectDb,
   mongoose,
@@ -26,7 +25,6 @@ import {
 } from "../index";
 
 const PASSWORD = "Password123!";
-const ARGON2_OPTS = { memorySize: 19456, iterations: 2, parallelism: 1, hashLength: 32 } as const;
 
 const AMBASSADORS = [
   {
@@ -165,12 +163,7 @@ const PROJECTS = [
 
 async function main() {
   await connectDb();
-  const passwordHash = await argon2id({
-    password: PASSWORD,
-    salt: randomBytes(16),
-    ...ARGON2_OPTS,
-    outputType: "encoded",
-  });
+  const passwordHash = await bcrypt.hash(PASSWORD, 12);
   const admin = await UserModel.findOne({ role: "admin" }).lean();
 
   console.log("\n=== Ambassadors ===");
