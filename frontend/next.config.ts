@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
   // for standalone-output targets (Netlify's Next.js runtime uses this) —
   // harmless on Vercel, which does its own separate dependency tracing.
   outputFileTracingIncludes: {
-    "/**": ["./node_modules/.pnpm/@node-rs+argon2-linux-x64-gnu@*/**/*"],
+    "/**": ["./node_modules/.pnpm/@node-rs+argon2*/**/*"],
   },
   transpilePackages: [
     "@san/core",
