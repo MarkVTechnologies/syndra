@@ -35,7 +35,14 @@ const nextConfig: NextConfig = {
   // for standalone-output targets (Netlify's Next.js runtime uses this) —
   // harmless on Vercel, which does its own separate dependency tracing.
   outputFileTracingIncludes: {
-    "/**": ["./node_modules/.pnpm/@node-rs+argon2*/**/*"],
+    // Path is relative to this file's directory (frontend/) — pnpm's
+    // content-addressable store only exists at the monorepo root, one
+    // level up (frontend/node_modules/.pnpm doesn't exist; everything in
+    // frontend/node_modules is a symlink into ../node_modules/.pnpm).
+    // Confirmed by direct inspection, not assumed — the first two attempts
+    // at this glob silently matched nothing because they pointed at a
+    // path that was never going to exist.
+    "/**": ["../node_modules/.pnpm/@node-rs+argon2*/**/*"],
   },
   transpilePackages: [
     "@san/core",
