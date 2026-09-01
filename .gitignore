@@ -8,6 +8,12 @@ out/
 build/
 dist/
 
+# serwist-generated service worker (frontend/next.config.ts swDest) — build
+# output, rebuilt (with a new content hash in the worker filename) every
+# build, never hand-edited.
+frontend/public/sw.js
+frontend/public/swe-worker-*.js
+
 # turbo
 .turbo/
 
@@ -31,6 +37,9 @@ pnpm-debug.log*
 
 # vercel
 .vercel
+
+# netlify
+.netlify
 
 # typescript
 *.tsbuildinfo

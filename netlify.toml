@@ -1,0 +1,13 @@
+[build]
+  # Monorepo (Turborepo + pnpm workspaces) — install from the repo root so
+  # workspace:* deps between frontend/ and backend/*/ resolve correctly,
+  # then build only the frontend package. Mirrors frontend/vercel.ts's
+  # buildCommand/installCommand pattern for the Vercel target.
+  command = "pnpm install --frozen-lockfile && pnpm turbo run build --filter=@san/frontend"
+  publish = "frontend/.next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
