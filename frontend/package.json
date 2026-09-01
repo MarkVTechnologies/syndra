@@ -74,6 +74,7 @@
     "serwist": "^9.0.11",
     "@vercel/config": "^0.6.1",
     "@netlify/plugin-nextjs": "^5.13.7",
+    "@netlify/plugin-csp-nonce": "^1.6.2",
     "@types/qrcode": "^1.5.5"
   }
 }
