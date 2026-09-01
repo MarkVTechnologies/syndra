@@ -1,0 +1,33 @@
+{
+  "name": "san",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Syndicators Ambassadors Network — real-estate syndication distribution platform",
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "test:e2e:install": "pnpm --filter @san/e2e exec playwright install --with-deps chromium webkit",
+    "db:indexes": "pnpm --filter @san/db run indexes",
+    "db:seed": "pnpm --filter @san/db run seed",
+    "db:seed:test-data": "pnpm --filter @san/db run seed:test-data",
+    "format": "prettier --write .",
+    "prepare": "husky || true"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "eslint": "^9.17.0",
+    "@eslint/js": "^9.17.0",
+    "typescript-eslint": "^8.19.0",
+    "@next/eslint-plugin-next": "15.1.3"
+  }
+}

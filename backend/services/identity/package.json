@@ -1,0 +1,30 @@
+{
+  "name": "@san/service-identity",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./session-cache": "./src/session-cache.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@san/core": "workspace:*",
+    "@san/db": "workspace:*",
+    "@san/service-notification": "workspace:*",
+    "@node-rs/argon2": "^2.0.2",
+    "@upstash/redis": "^1.34.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+env:
+  NODE_ENV: test
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm turbo run typecheck
+
+      - name: Lint (includes boundary rules)
+        run: pnpm turbo run lint
+
+      - name: Unit tests
+        run: pnpm turbo run test
+
+      - name: Build
+        run: pnpm turbo run build
+        env:
+          NEXT_PUBLIC_APP_URL: https://preview.san.com
+          AUTH_SECRET: ci-placeholder-secret-please-override-32
+          ENCRYPTION_KEY: 0000000000000000000000000000000000000000000000000000000000000000
+          ATTRIBUTION_SECRET: ci-placeholder-secret-please-override-32
+          MONGODB_URI: mongodb://localhost:27017
+          MONGODB_DB: san_ci
+          UPSTASH_REDIS_REST_URL: https://example.upstash.io
+          UPSTASH_REDIS_REST_TOKEN: ci-placeholder
+          RESEND_API_KEY: ci-placeholder
+          EMAIL_FROM: "SAN <noreply@mail.san.com>"
+          EMAIL_REPLY_TO: support@san.com
+          TURNSTILE_SECRET_KEY: ci-placeholder
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ci-placeholder
+          ADMIN_SEED_EMAIL: admin@san.com
+          ADMIN_SEED_PASSWORD: ci-placeholder-password
+
+  # PRD §14 Day 5 Block 4. Runs against a real deployed preview (real Atlas
+  # + Upstash + Turnstile test key), never a locally-started server — this
+  # repo has no Docker/local-Mongo path by design (ADR-001), and E2E value
+  # comes from testing the same infra production uses. Skips cleanly on
+  # forks/PRs from contributors who don't have the preview secrets.
+  e2e:
+    needs: ci
+    runs-on: ubuntu-latest
+    if: ${{ vars.E2E_BASE_URL != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm test:e2e:install
+
+      - name: Run E2E suite against preview
+        run: pnpm test:e2e
+        env:
+          E2E_BASE_URL: ${{ vars.E2E_BASE_URL }}
+          E2E_ADMIN_EMAIL: ${{ secrets.E2E_ADMIN_EMAIL }}
+          E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD }}
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: e2e/playwright-report/
+          retention-days: 14
