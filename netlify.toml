@@ -24,4 +24,4 @@
   # @node-rs/argon2's native .node binary can't be inlined by esbuild at all
   # (a native addon, not source it can parse), so it's silently dropped
   # ("Cannot find module '@node-rs/argon2'" at runtime, breaking login).
-  external_node_modules = ["mongoose", "@node-rs/argon2", "@node-rs/argon2-linux-x64-gnu"]
+  external_node_modules = ["mongoose", "@node-rs/argon2", "@node-rs/argon2-linux-x64-gnu", "@node-rs/argon2-linux-arm64-gnu"]

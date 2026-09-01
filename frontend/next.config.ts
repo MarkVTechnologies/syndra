@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
     "@node-rs/argon2",
     "@node-rs/argon2-win32-x64-msvc",
     "@node-rs/argon2-linux-x64-gnu",
+    // Lambda architecture (x86_64 vs arm64) isn't exposed anywhere this
+    // build can inspect — listing both costs nothing (whichever one didn't
+    // get installed simply never resolves) and rules out architecture
+    // mismatch as a cause outright, rather than guessing at one.
+    "@node-rs/argon2-linux-arm64-gnu",
     "mongoose",
   ],
   // @node-rs/argon2 loads its platform binary via a dynamic require() keyed
@@ -87,6 +92,7 @@ const nextConfig: NextConfig = {
         "@node-rs/argon2": "commonjs @node-rs/argon2",
         "@node-rs/argon2-win32-x64-msvc": "commonjs @node-rs/argon2-win32-x64-msvc",
         "@node-rs/argon2-linux-x64-gnu": "commonjs @node-rs/argon2-linux-x64-gnu",
+        "@node-rs/argon2-linux-arm64-gnu": "commonjs @node-rs/argon2-linux-arm64-gnu",
       });
       config.externals = externals;
       // MongoDB driver's optional auth/compression backends — never
