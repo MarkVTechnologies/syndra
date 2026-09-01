@@ -4,6 +4,10 @@ import { LogoMark } from "@/components/brand/logo-mark";
 import { JoinForm } from "@/components/syndicator/join-form";
 import { LineArt } from "@/components/decor/line-art";
 
+// See (marketing)/page.tsx for why: middleware.ts's nonce-based CSP is
+// meaningless (and a latent security no-op) on a statically cached page.
+export const dynamic = "force-dynamic";
+
 /**
  * Ambassador-independent syndicator signup. Every other onboarding path
  * (`/[slug]/join`) carries a specific ambassador's signed attribution

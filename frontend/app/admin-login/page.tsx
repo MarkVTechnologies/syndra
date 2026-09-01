@@ -3,6 +3,10 @@ import { LoginForm } from "@/app/(auth)/login/login-form";
 import { LogoMark } from "@/components/brand/logo-mark";
 import { LineArt } from "@/components/decor/line-art";
 
+// See (marketing)/page.tsx for why: middleware.ts's nonce-based CSP is
+// meaningless (and a latent security no-op) on a statically cached page.
+export const dynamic = "force-dynamic";
+
 /**
  * Served at the public URL /admin/login via a next.config.ts rewrite — it
  * lives here, outside app/(admin)/admin/, specifically so it does NOT

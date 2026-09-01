@@ -13,6 +13,15 @@ const getCachedCount = unstable_cache(getWaitlistCount, ["waitlist-count"], {
   revalidate: 60,
 });
 
+// middleware.ts's CSP is nonce-based ('strict-dynamic') — a nonce baked
+// into a statically cached page is stale forever and matches nothing
+// (worse: it's a real security no-op, not just a display bug, since
+// anyone can read the same frozen nonce from the cached HTML). Per Next's
+// own docs, a fresh per-request nonce requires dynamic rendering. The
+// underlying data fetch above still uses its own 60s cache regardless —
+// this only stops the *page shell* from being statically cached.
+export const dynamic = "force-dynamic";
+
 export default async function LandingPage() {
   // The hero counter is decorative, not critical path — a transient DB
   // hiccup at build/ISR-revalidation time must never fail the whole page.

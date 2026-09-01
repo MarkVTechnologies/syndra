@@ -17,16 +17,6 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Statically inlined at build time, where process.env.NETLIFY is
-  // reliably "true" (well-documented Netlify build behavior) — read this
-  // instead of process.env.NETLIFY directly at runtime inside
-  // middleware.ts, since Edge Function runtime env var exposure is a
-  // separate, much less certain thing (confirmed empirically: checking
-  // process.env.NETLIFY at request time never evaluated true there, even
-  // though this is genuinely a Netlify deploy).
-  env: {
-    IS_NETLIFY: process.env.NETLIFY === "true" ? "true" : "false",
-  },
   // Native binary (@node-rs/argon2) must stay a real require() at runtime,
   // never webpack-bundled — Next's bundler can't parse a .node file.
   serverExternalPackages: [
