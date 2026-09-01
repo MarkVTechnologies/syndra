@@ -100,8 +100,17 @@ export default auth(async (req) => {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const csp = buildCsp(nonce);
 
+  // Next's automatic nonce propagation into its own framework-generated
+  // <script> tags reads the nonce by parsing the Content-Security-Policy
+  // value off the REQUEST that reaches the render — the x-nonce header
+  // alone (a convention for app code to read its own nonce via headers())
+  // does nothing for Next's internal script tags. Without this, every
+  // framework script tag renders with no nonce attribute at all, and under
+  // 'strict-dynamic' the browser silently refuses to execute all of them —
+  // the whole client bundle fails to hydrate with no console error.
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set("x-nonce", nonce);
+  requestHeaders.set("Content-Security-Policy", csp);
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
   response.headers.set("Content-Security-Policy", csp);
