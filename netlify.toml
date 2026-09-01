@@ -30,6 +30,17 @@
   # the app's middleware already set (both nonces end up listed as valid
   # script-src sources — the app's own nonce ends up unused but harmless).
   package = "@netlify/plugin-csp-nonce"
+  [plugins.inputs]
+    # Defaults to true, which emits a separate Content-Security-Policy-Report-Only
+    # header carrying the plugin's nonce, while leaving the real *enforced*
+    # Content-Security-Policy header as whatever middleware.ts already set —
+    # untouched, still carrying only the app's own nonce, which no script
+    # tag has anymore once this plugin rewrites them. Confirmed by direct
+    # inspection: every script tag correctly got the plugin's nonce, but the
+    # enforced header still failed to match any of them. False confidence
+    # otherwise — the site looks "fixed" (build succeeds, page loads, no
+    # console error) while every script is still silently blocked.
+    reportOnly = false
 
 [functions]
   # Netlify's own function bundler (esbuild-based) repackages Next's server
