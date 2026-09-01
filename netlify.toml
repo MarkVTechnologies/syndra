@@ -11,3 +11,17 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[functions]
+  # Netlify's own function bundler (esbuild-based) repackages Next's server
+  # output for Lambda and does not consult Next's own `serverExternalPackages`
+  # (frontend/next.config.ts) — that setting only governs Next's webpack
+  # build, not Netlify's post-build repackaging step. Without this, esbuild
+  # tries to inline these and breaks in two different ways: mongoose ends up
+  # duplicated (a second bundled copy alongside the real one, which breaks
+  # Mongoose's internal Schema.Types.ObjectId identity checks — the
+  # "Cannot read properties of undefined (reading '_id')" crash), and
+  # @node-rs/argon2's native .node binary can't be inlined by esbuild at all
+  # (a native addon, not source it can parse), so it's silently dropped
+  # ("Cannot find module '@node-rs/argon2'" at runtime, breaking login).
+  external_node_modules = ["mongoose", "@node-rs/argon2", "@node-rs/argon2-linux-x64-gnu"]
