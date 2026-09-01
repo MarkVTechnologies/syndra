@@ -22,8 +22,21 @@ const nextConfig: NextConfig = {
   serverExternalPackages: [
     "@node-rs/argon2",
     "@node-rs/argon2-win32-x64-msvc",
+    "@node-rs/argon2-linux-x64-gnu",
     "mongoose",
   ],
+  // @node-rs/argon2 loads its platform binary via a dynamic require() keyed
+  // on process.platform/arch — Next's file tracer (which decides what real
+  // files get copied into the standalone build every deploy target other
+  // than Vercel actually runs) can't follow that statically, so the native
+  // .node file silently never makes it into the deployed function even
+  // though serverExternalPackages above correctly keeps the require
+  // un-bundled. Force it into every route's trace explicitly. Only matters
+  // for standalone-output targets (Netlify's Next.js runtime uses this) —
+  // harmless on Vercel, which does its own separate dependency tracing.
+  outputFileTracingIncludes: {
+    "/**": ["./node_modules/.pnpm/@node-rs+argon2-linux-x64-gnu@*/**/*"],
+  },
   transpilePackages: [
     "@san/core",
     "@san/db",
