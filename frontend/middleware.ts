@@ -113,7 +113,7 @@ export default auth(async (req) => {
   // carried after the plugin's HTML rewrite, so every script was silently
   // blocked). Vercel has no such second nonce source, so this app's own
   // header is the only and correct one there.
-  if (process.env.NETLIFY !== "true") {
+  if (process.env.IS_NETLIFY !== "true") {
     response.headers.set("Content-Security-Policy", csp);
   }
   response.headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
