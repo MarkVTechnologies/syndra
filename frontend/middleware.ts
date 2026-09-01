@@ -104,7 +104,18 @@ export default auth(async (req) => {
   requestHeaders.set("x-nonce", nonce);
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
-  response.headers.set("Content-Security-Policy", csp);
+  // On Netlify, @netlify/plugin-csp-nonce owns the CSP header — it runs as
+  // its own edge function that rewrites every script tag with its own
+  // nonce, and whichever edge function's Content-Security-Policy header
+  // survives the chain is the one the browser enforces. Setting ours here
+  // too means one silently clobbers the other (confirmed: this app's
+  // header was winning, generated from a nonce that no script tag actually
+  // carried after the plugin's HTML rewrite, so every script was silently
+  // blocked). Vercel has no such second nonce source, so this app's own
+  // header is the only and correct one there.
+  if (process.env.NETLIFY !== "true") {
+    response.headers.set("Content-Security-Policy", csp);
+  }
   response.headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
