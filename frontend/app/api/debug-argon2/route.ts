@@ -73,5 +73,47 @@ export async function GET() {
     info.frontendPnpmDirError = e instanceof Error ? e.message : String(e);
   }
 
+  // Does the top-level pnpm symlink (node_modules/@node-rs/argon2 ->
+  // .pnpm/@node-rs+argon2@x/node_modules/@node-rs/argon2) that bare
+  // require("@node-rs/argon2") depends on actually exist in the deployed
+  // bundle, or did the bundler only copy the .pnpm CAS entries themselves?
+  try {
+    info.topLevelScopeDirEntries = fs.readdirSync("/var/task/node_modules/@node-rs");
+  } catch (e) {
+    info.topLevelScopeDirError = e instanceof Error ? e.message : String(e);
+  }
+  try {
+    info.topLevelArgon2Lstat = fs.lstatSync("/var/task/node_modules/@node-rs/argon2").isSymbolicLink()
+      ? { symlink: true, target: fs.readlinkSync("/var/task/node_modules/@node-rs/argon2") }
+      : { symlink: false };
+  } catch (e) {
+    info.topLevelArgon2LstatError = e instanceof Error ? e.message : String(e);
+  }
+
+  // If the top-level symlink is missing, try loading straight from the CAS
+  // entry's own nested node_modules — this is a real, working path if the
+  // native files are genuinely there, regardless of what require("@node-rs/argon2")
+  // by bare specifier can see.
+  try {
+    const casDir = fs
+      .readdirSync(pnpmDir)
+      .find((n) => n.startsWith("@node-rs+argon2@"));
+    if (casDir) {
+      const directPath = `${pnpmDir}/${casDir}/node_modules/@node-rs/argon2`;
+      info.directCasPathEntries = fs.readdirSync(directPath);
+      const nodeRequire = createRequire(__filename);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const argon2Direct: any = nodeRequire(directPath);
+      const hashed: string = await argon2Direct.hash("diagnostic-test-password");
+      const verified: boolean = await argon2Direct.verify(hashed, "diagnostic-test-password");
+      info.argon2FunctionalTestDirectCasPath = { hashed: hashed.slice(0, 20) + "...", verified };
+    } else {
+      info.directCasPathError = "no @node-rs+argon2@* entry found in .pnpm dir";
+    }
+  } catch (e) {
+    info.argon2CallErrorDirectCasPath =
+      e instanceof Error ? { message: e.message, stack: e.stack?.split("\n").slice(0, 6) } : String(e);
+  }
+
   return NextResponse.json(info);
 }
