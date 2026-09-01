@@ -11,6 +11,11 @@ import type { NextAuthConfig } from "next-auth";
  * native .node binary regardless of runtime target.
  */
 export const authConfig: NextAuthConfig = {
+  // Auth.js only auto-trusts the request host on Vercel (it special-cases
+  // the VERCEL env var); every other host, Netlify included, throws
+  // UntrustedHost on every session/callback request unless this is set
+  // explicitly — documented Auth.js requirement for non-Vercel deploys.
+  trustHost: true,
   session: { strategy: "jwt", maxAge: 60 * 60 * 24 * 7 },
   pages: { signIn: "/login" },
   providers: [],
