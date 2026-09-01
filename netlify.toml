@@ -12,6 +12,25 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+[[plugins]]
+  # frontend/middleware.ts sets a nonce-based CSP the way Next.js's own docs
+  # describe (generate a nonce, forward it via an x-nonce request header,
+  # Next auto-attaches it to the framework scripts it injects) — but that
+  # mechanism requires dynamic rendering to work, per Next's own
+  # documentation, and several of this app's pages (marketing home, all
+  # auth screens) are statically rendered. Vercel's own hosting has
+  # special-cased handling that makes this combination work anyway; generic
+  # standalone-output hosts don't replicate it, so on Netlify every script
+  # tag rendered on a static page carries no nonce attribute at all, and
+  # 'strict-dynamic' then blocks every single one of them silently (no
+  # console error, no visible failure beyond "nothing on the page works") —
+  # this is what broke every login form. This plugin runs as an edge
+  # function that generates its own per-request nonce, rewrites the HTML to
+  # attach it to script tags, and merges its own CSP header with whatever
+  # the app's middleware already set (both nonces end up listed as valid
+  # script-src sources — the app's own nonce ends up unused but harmless).
+  package = "@netlify/plugin-csp-nonce"
+
 [functions]
   # Netlify's own function bundler (esbuild-based) repackages Next's server
   # output for Lambda and does not consult Next's own `serverExternalPackages`
