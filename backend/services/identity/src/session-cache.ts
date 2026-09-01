@@ -2,8 +2,8 @@ import { Redis } from "@upstash/redis";
 import { getEnv } from "@san/core/env";
 
 /**
- * Pure Redis, zero Mongo/native deps — safe to import from edge middleware
- * (auth-edge.ts) without pulling in mongoose/@node-rs/argon2. This is what
+ * Pure Redis, zero Mongo deps — safe to import from edge middleware
+ * (auth-edge.ts) without pulling in mongoose/password hashing. This is what
  * makes "sessionVersion compared on every request via middleware" (PRD
  * §12.1) actually cheap: a JWT is self-contained and only re-issued
  * periodically, so instant revocation needs a fast side-channel the

@@ -17,38 +17,7 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Native binary (@node-rs/argon2) must stay a real require() at runtime,
-  // never webpack-bundled — Next's bundler can't parse a .node file.
-  serverExternalPackages: [
-    "@node-rs/argon2",
-    "@node-rs/argon2-win32-x64-msvc",
-    "@node-rs/argon2-linux-x64-gnu",
-    // Lambda architecture (x86_64 vs arm64) isn't exposed anywhere this
-    // build can inspect — listing both costs nothing (whichever one didn't
-    // get installed simply never resolves) and rules out architecture
-    // mismatch as a cause outright, rather than guessing at one.
-    "@node-rs/argon2-linux-arm64-gnu",
-    "mongoose",
-  ],
-  // @node-rs/argon2 loads its platform binary via a dynamic require() keyed
-  // on process.platform/arch — Next's file tracer (which decides what real
-  // files get copied into the standalone build every deploy target other
-  // than Vercel actually runs) can't follow that statically, so the native
-  // .node file silently never makes it into the deployed function even
-  // though serverExternalPackages above correctly keeps the require
-  // un-bundled. Force it into every route's trace explicitly. Only matters
-  // for standalone-output targets (Netlify's Next.js runtime uses this) —
-  // harmless on Vercel, which does its own separate dependency tracing.
-  outputFileTracingIncludes: {
-    // Path is relative to this file's directory (frontend/) — pnpm's
-    // content-addressable store only exists at the monorepo root, one
-    // level up (frontend/node_modules/.pnpm doesn't exist; everything in
-    // frontend/node_modules is a symlink into ../node_modules/.pnpm).
-    // Confirmed by direct inspection, not assumed — the first two attempts
-    // at this glob silently matched nothing because they pointed at a
-    // path that was never going to exist.
-    "/**": ["../node_modules/.pnpm/@node-rs+argon2*/**/*"],
-  },
+  serverExternalPackages: ["mongoose"],
   transpilePackages: [
     "@san/core",
     "@san/db",
@@ -82,19 +51,7 @@ const nextConfig: NextConfig = {
     },
   },
   webpack: (config, { isServer }) => {
-    // serverExternalPackages doesn't reliably externalize a native binary
-    // reached through a transpiled workspace package (@san/service-identity
-    // is in transpilePackages above) — force it here so webpack never tries
-    // to parse the .node file as a module.
     if (isServer) {
-      const externals = Array.isArray(config.externals) ? config.externals : [];
-      externals.push({
-        "@node-rs/argon2": "commonjs @node-rs/argon2",
-        "@node-rs/argon2-win32-x64-msvc": "commonjs @node-rs/argon2-win32-x64-msvc",
-        "@node-rs/argon2-linux-x64-gnu": "commonjs @node-rs/argon2-linux-x64-gnu",
-        "@node-rs/argon2-linux-arm64-gnu": "commonjs @node-rs/argon2-linux-arm64-gnu",
-      });
-      config.externals = externals;
       // MongoDB driver's optional auth/compression backends — never
       // installed, safe to no-op when webpack statically probes for them.
       config.resolve.fallback = {

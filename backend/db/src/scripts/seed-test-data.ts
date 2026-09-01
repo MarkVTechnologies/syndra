@@ -14,7 +14,8 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 loadEnv({ path: path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../.env") });
 
-import { hash } from "@node-rs/argon2";
+import { randomBytes } from "node:crypto";
+import { argon2id } from "hash-wasm";
 import {
   connectDb,
   mongoose,
@@ -25,7 +26,7 @@ import {
 } from "../index";
 
 const PASSWORD = "Password123!";
-const ARGON2_OPTS = { memoryCost: 19456, timeCost: 2, parallelism: 1 };
+const ARGON2_OPTS = { memorySize: 19456, iterations: 2, parallelism: 1, hashLength: 32 } as const;
 
 const AMBASSADORS = [
   {
@@ -164,7 +165,12 @@ const PROJECTS = [
 
 async function main() {
   await connectDb();
-  const passwordHash = await hash(PASSWORD, ARGON2_OPTS);
+  const passwordHash = await argon2id({
+    password: PASSWORD,
+    salt: randomBytes(16),
+    ...ARGON2_OPTS,
+    outputType: "encoded",
+  });
   const admin = await UserModel.findOne({ role: "admin" }).lean();
 
   console.log("\n=== Ambassadors ===");
