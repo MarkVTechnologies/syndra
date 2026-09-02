@@ -27,6 +27,7 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { FormField } from "@/components/ui/form-field";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -295,7 +296,7 @@ export function WaitlistForm() {
                 </FormField>
 
                 <FormField label="Password" htmlFor="password" required error={errors.password?.message} hint="Minimum 10 characters — this becomes your login at launch">
-                  <IconInput icon={Lock} id="password" type="password" autoComplete="new-password" invalid={!!errors.password} {...register("password")} />
+                  <PasswordInput icon={Lock} id="password" autoComplete="new-password" invalid={!!errors.password} {...register("password")} />
                 </FormField>
 
                 <div className="flex items-start gap-2">

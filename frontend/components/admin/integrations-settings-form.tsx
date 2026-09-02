@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { updateIntegrationSettingsAction } from "@/app/actions/settings";
@@ -132,14 +133,24 @@ export function IntegrationsSettingsForm({ status }: { status: IntegrationStatus
                   hint={field.hint}
                 >
                   <div className="flex items-center gap-2">
-                    <Input
-                      id={field.key}
-                      type={field.secret ? "password" : "text"}
-                      autoComplete="off"
-                      placeholder={fieldStatus.masked ?? "Not set"}
-                      value={values[field.key] ?? ""}
-                      onChange={(e) => setField(field.key, e.target.value)}
-                    />
+                    {field.secret ? (
+                      <PasswordInput
+                        id={field.key}
+                        autoComplete="off"
+                        placeholder={fieldStatus.masked ?? "Not set"}
+                        value={values[field.key] ?? ""}
+                        onChange={(e) => setField(field.key, e.target.value)}
+                      />
+                    ) : (
+                      <Input
+                        id={field.key}
+                        type="text"
+                        autoComplete="off"
+                        placeholder={fieldStatus.masked ?? "Not set"}
+                        value={values[field.key] ?? ""}
+                        onChange={(e) => setField(field.key, e.target.value)}
+                      />
+                    )}
                     <SourceBadge status={fieldStatus} />
                   </div>
                 </FormField>

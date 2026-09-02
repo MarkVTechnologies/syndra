@@ -11,6 +11,7 @@ import { z } from "zod";
 import Link from "next/link";
 
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { FormField } from "@/components/ui/form-field";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -216,7 +217,7 @@ export function SignupForm() {
       </FormField>
 
       <FormField label="Password" htmlFor="password" required error={errors.password?.message} hint="Minimum 10 characters">
-        <Input id="password" type="password" autoComplete="new-password" invalid={!!errors.password} {...register("password")} />
+        <PasswordInput id="password" autoComplete="new-password" invalid={!!errors.password} {...register("password")} />
       </FormField>
 
       <div className="flex items-start gap-2">

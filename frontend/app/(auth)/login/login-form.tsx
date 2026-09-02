@@ -9,6 +9,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { LoginInput, type LoginInputType } from "@san/core/schemas/auth";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { FormField } from "@/components/ui/form-field";
 import { Button } from "@/components/ui/button";
 
@@ -82,7 +83,7 @@ export function LoginForm({ restrictToRole }: { restrictToRole?: "admin" } = {})
         <Input id="email" type="email" autoComplete="email" invalid={!!errors.email} {...register("email")} />
       </FormField>
       <FormField label="Password" htmlFor="password" required error={errors.password?.message}>
-        <Input id="password" type="password" autoComplete="current-password" invalid={!!errors.password} {...register("password")} />
+        <PasswordInput id="password" autoComplete="current-password" invalid={!!errors.password} {...register("password")} />
       </FormField>
       {formError && <p className="text-sm text-danger">{formError}</p>}
       <div className="flex justify-end">

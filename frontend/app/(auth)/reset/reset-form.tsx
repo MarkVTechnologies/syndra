@@ -7,7 +7,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { z } from "zod";
 import { toast } from "sonner";
 import { CheckCircle2 } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { FormField } from "@/components/ui/form-field";
 import { Button } from "@/components/ui/button";
 import { resetPasswordAction } from "@/app/actions/auth";
@@ -56,7 +56,7 @@ export function ResetForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-6 flex flex-col gap-4" noValidate>
       <FormField label="New password" htmlFor="password" required error={errors.password?.message} hint="Minimum 10 characters">
-        <Input id="password" type="password" autoComplete="new-password" invalid={!!errors.password} {...register("password")} />
+        <PasswordInput id="password" autoComplete="new-password" invalid={!!errors.password} {...register("password")} />
       </FormField>
       <Button type="submit" loading={isSubmitting} className="mt-2 w-full">
         Update password
