@@ -91,7 +91,7 @@ export function OnboardingWizard({
         <h2 className="mt-5 font-display text-xl font-bold text-foreground">Your microsite is live</h2>
         <p className="mt-1 text-sm text-muted-foreground">Share it anywhere — it&apos;s yours from now on.</p>
         <div className="mt-4 rounded-lg bg-brass-100 px-4 py-3">
-          <p className="font-mono text-sm font-semibold text-brass-600">san.com/{slug}</p>
+          <p className="font-mono text-sm font-semibold text-brass-600">syndran.com/{slug}</p>
         </div>
         <div className="mt-6 flex gap-2">
           <Button
@@ -106,7 +106,7 @@ export function OnboardingWizard({
           </Button>
           <Button
             className="flex-1"
-            onClick={() => navigator.share?.({ title: "My SAN microsite", url }).catch(() => {})}
+            onClick={() => navigator.share?.({ title: "My Syndran microsite", url }).catch(() => {})}
           >
             <Share2 className="size-4" /> Share
           </Button>

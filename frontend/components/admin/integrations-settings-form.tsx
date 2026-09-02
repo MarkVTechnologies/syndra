@@ -34,7 +34,7 @@ const SECTIONS: SectionConfig[] = [
     fields: [
       { key: "resendApiKey", label: "API key", secret: true },
       { key: "resendWebhookSecret", label: "Webhook signing secret", secret: true },
-      { key: "emailFrom", label: "From address", secret: false, hint: "e.g. SAN <hello@sanhq.com>" },
+      { key: "emailFrom", label: "From address", secret: false, hint: "e.g. Syndran <hello@syndran.com>" },
       { key: "emailReplyTo", label: "Reply-to address", secret: false },
     ],
   },

@@ -9,7 +9,7 @@ export interface AmbassadorApprovedProps {
 export default function AmbassadorApproved({ fullName, micrositeUrl }: AmbassadorApprovedProps) {
   const firstName = fullName.split(" ")[0];
   return (
-    <EmailLayout preview="You're live on SAN">
+    <EmailLayout preview="You're live on Syndran">
       <Text style={{ fontSize: 20, fontWeight: 700, color: emailColors.obsidian900 }}>
         You&apos;re live, {firstName}
       </Text>

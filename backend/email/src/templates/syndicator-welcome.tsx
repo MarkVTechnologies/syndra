@@ -8,9 +8,9 @@ export interface SyndicatorWelcomeProps {
 
 export default function SyndicatorWelcome({ dashboardUrl, ambassador }: SyndicatorWelcomeProps) {
   return (
-    <EmailLayout preview="Welcome to SAN — browse vetted opportunities">
+    <EmailLayout preview="Welcome to Syndran — browse vetted opportunities">
       <Text style={{ fontSize: 20, fontWeight: 700, color: emailColors.obsidian900 }}>
-        Welcome to SAN
+        Welcome to Syndran
       </Text>
       <Text style={{ fontSize: 15, lineHeight: "24px", color: emailColors.slate600 }}>
         Browse vetted real-estate syndication opportunities and track your

@@ -206,13 +206,13 @@ export function SignupForm() {
         htmlFor="desiredSlug"
         required
         error={errors.desiredSlug?.message}
-        hint="This becomes san.com/yourname"
+        hint="This becomes syndran.com/yourname"
       >
         <div className="relative">
           <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-            san.com/
+            syndran.com/
           </span>
-          <Input id="desiredSlug" className="pl-[68px] font-mono" invalid={!!errors.desiredSlug} {...register("desiredSlug")} />
+          <Input id="desiredSlug" className="pl-[102px] font-mono" invalid={!!errors.desiredSlug} {...register("desiredSlug")} />
         </div>
       </FormField>
 

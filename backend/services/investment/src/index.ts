@@ -112,7 +112,7 @@ export async function initiatePayment(
     await investment.save();
     return ok({
       bankTransfer: {
-        accountName: "SAN Escrow (see admin for account details)",
+        accountName: "Syndran Escrow (see admin for account details)",
         note: `Reference: ${investment.idempotencyKey}`,
       },
     });

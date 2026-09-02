@@ -2,8 +2,8 @@
 export function buildWhatsAppLink(whatsapp: string, opportunityTitle?: string): string {
   const digits = whatsapp.replace(/\D/g, "");
   const message = opportunityTitle
-    ? `Hi! I'm interested in "${opportunityTitle}" on SAN. Can you tell me more?`
-    : "Hi! I found your SAN page and I'm interested in investing. Can you tell me more?";
+    ? `Hi! I'm interested in "${opportunityTitle}" on Syndran. Can you tell me more?`
+    : "Hi! I found your Syndran page and I'm interested in investing. Can you tell me more?";
   return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
 }
 

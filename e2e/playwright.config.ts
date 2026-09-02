@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 /**
- * Runs against a real, already-running SAN instance — never spins up its
+ * Runs against a real, already-running Syndran instance — never spins up its
  * own Mongo/Redis, since PRD ADR-001 rules out anything but managed
  * serverless infra, and CI has no such infra to give it. E2E_BASE_URL
  * points this at a Vercel preview deployment (wired with real Atlas/Upstash)

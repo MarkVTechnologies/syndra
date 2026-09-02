@@ -8,8 +8,8 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"),
   title: {
-    default: "SAN — Syndicators Ambassadors Network",
-    template: "%s · SAN",
+    default: "Syndran — Syndicators Ambassadors Network",
+    template: "%s · Syndran",
   },
   description:
     "Earn recurring commission distributing vetted real-estate syndication deals.",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "SAN",
+    title: "Syndran",
   },
   icons: {
     icon: [
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "SAN",
-    title: "SAN — Syndicators Ambassadors Network",
+    siteName: "Syndran",
+    title: "Syndran — Syndicators Ambassadors Network",
     description:
       "Earn recurring commission distributing vetted real-estate syndication deals.",
   },

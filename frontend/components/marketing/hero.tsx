@@ -87,7 +87,7 @@ export function Hero({ registeredCount }: { registeredCount: number }) {
           transition={{ duration: 0.32, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
           className="mt-5 max-w-xl text-lg text-[var(--estate-sand-300)]"
         >
-          SAN gives every realtor a personal deal page, automatic attribution, and
+          Syndran gives every realtor a personal deal page, automatic attribution, and
           a transparent commission ledger — built for the phone in your hand.
         </motion.p>
         <motion.div

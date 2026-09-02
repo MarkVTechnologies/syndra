@@ -14,7 +14,7 @@ export default function PrivacyPage() {
         Placeholder — final policy pending legal review (PRD §12.4 NDPR
         alignment). We collect the information you provide at signup to
         operate your account, never sell it, and honor data export/deletion
-        requests. Contact support@san.com for data requests.
+        requests. Contact support@syndran.com for data requests.
       </p>
     </Container>
   );

@@ -36,7 +36,7 @@ export async function generateMetadata({
   if (!result.ok) return {};
 
   const { ambassador: amb } = result.data;
-  const title = `${amb.fullName} — SAN Ambassador`;
+  const title = `${amb.fullName} — Syndran Ambassador`;
   const description = amb.headline || "Invest in vetted real-estate syndication deals.";
 
   return {
@@ -110,7 +110,7 @@ export default async function MicrositePage({
       <Container className="py-10">
         <div className="mb-6 flex items-center gap-2 rounded-lg border border-border bg-surface p-4 text-sm text-muted-foreground">
           <ShieldCheck className="size-4 shrink-0 text-primary" />
-          Every opportunity below is vetted and published by the SAN admin team.
+          Every opportunity below is vetted and published by the Syndran admin team.
         </div>
 
         {opportunities.length === 0 ? (

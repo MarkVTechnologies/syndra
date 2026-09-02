@@ -30,7 +30,7 @@ export function MicrositeLinkCard({ slug }: { slug: string }) {
 
   const share = () => {
     if (navigator.share) {
-      navigator.share({ title: "Invest with me on SAN", url }).catch(() => {});
+      navigator.share({ title: "Invest with me on Syndran", url }).catch(() => {});
     } else {
       copy();
     }

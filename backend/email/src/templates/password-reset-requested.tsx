@@ -11,7 +11,7 @@ export default function PasswordResetRequested({
   requestingIp,
 }: PasswordResetRequestedProps) {
   return (
-    <EmailLayout preview="Reset your SAN password">
+    <EmailLayout preview="Reset your Syndran password">
       <Text style={{ fontSize: 20, fontWeight: 700, color: emailColors.obsidian900 }}>
         Reset your password
       </Text>

@@ -37,7 +37,7 @@ export async function addWaitlistNote(waitlistId: string, note: string): Promise
   return result;
 }
 
-const LAUNCH_CONFIRMATION_PHRASE = "LAUNCH SAN";
+const LAUNCH_CONFIRMATION_PHRASE = "LAUNCH SYNDRAN";
 
 /**
  * Irreversible: flips the app live and emails every pending waitlist row a

@@ -442,7 +442,7 @@ export async function resetPassword(token: string, newPassword: string): Promise
       name: "user/password_changed",
       data: {
         email: user.email,
-        revokeAllUrl: "mailto:support@san.com?subject=Unauthorized%20password%20change",
+        revokeAllUrl: "mailto:support@syndran.com?subject=Unauthorized%20password%20change",
         changedAt: new Date().toISOString(),
       },
     });

@@ -15,7 +15,7 @@ import {
 import { launchApp } from "@/app/actions/admin-waitlist";
 import type { LaunchStatus } from "@/lib/admin/waitlist-queries";
 
-const CONFIRMATION_PHRASE = "LAUNCH SAN";
+const CONFIRMATION_PHRASE = "LAUNCH SYNDRAN";
 
 export function LaunchPanel({ status }: { status: LaunchStatus }) {
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ export function LaunchPanel({ status }: { status: LaunchStatus }) {
       <div className="flex items-center gap-3 rounded-2xl border border-success/30 bg-success/10 p-4">
         <CheckCircle2 className="size-5 shrink-0 text-success" />
         <div>
-          <p className="text-sm font-semibold text-foreground">SAN is live</p>
+          <p className="text-sm font-semibold text-foreground">Syndran is live</p>
           <p className="text-sm text-muted-foreground">
             {status.convertedCount} account{status.convertedCount === 1 ? "" : "s"} converted from the waitlist.
           </p>
@@ -61,11 +61,11 @@ export function LaunchPanel({ status }: { status: LaunchStatus }) {
       <Dialog open={open} onOpenChange={setOpen}>
         <Button type="button" onClick={() => setOpen(true)} className="shrink-0 gap-2">
           <Rocket className="size-4" />
-          Launch SAN
+          Launch Syndran
         </Button>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Launch SAN to the waitlist</DialogTitle>
+            <DialogTitle>Launch Syndran to the waitlist</DialogTitle>
             <DialogDescription>
               This flips the app live and emails every registered waitlist entry a one-time login link. It cannot
               be reversed. Type <span className="font-mono font-semibold text-foreground">{CONFIRMATION_PHRASE}</span>{" "}

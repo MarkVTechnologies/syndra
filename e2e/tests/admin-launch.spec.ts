@@ -23,7 +23,7 @@ test.beforeEach(async ({ page }) => {
 test("launch confirm button stays disabled until the exact phrase is typed", async ({ page }) => {
   await page.goto("/admin/waitlist");
 
-  const launchButton = page.getByRole("button", { name: /^launch san$/i });
+  const launchButton = page.getByRole("button", { name: /^launch syndran$/i });
 
   // Already launched in this environment — nothing to gate.
   if (!(await launchButton.isVisible().catch(() => false))) {
@@ -34,11 +34,11 @@ test("launch confirm button stays disabled until the exact phrase is typed", asy
   const confirmButton = page.getByRole("button", { name: /confirm launch/i });
   await expect(confirmButton).toBeDisabled();
 
-  const phraseInput = page.getByPlaceholder("LAUNCH SAN");
-  await phraseInput.fill("launch san");
+  const phraseInput = page.getByPlaceholder("LAUNCH SYNDRAN");
+  await phraseInput.fill("launch syndran");
   await expect(confirmButton).toBeDisabled();
 
-  await phraseInput.fill("LAUNCH SAN");
+  await phraseInput.fill("LAUNCH SYNDRAN");
   await expect(confirmButton).toBeEnabled();
 
   await page.getByRole("button", { name: /cancel/i }).click();

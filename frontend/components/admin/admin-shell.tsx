@@ -43,7 +43,7 @@ export function AdminShell({
       <div aria-hidden className="texture-ledger-contained-dark pointer-events-none absolute inset-0 -z-10" />
       <aside className="relative hidden w-60 shrink-0 flex-col border-r border-border bg-surface md:flex">
         <Link href="/admin" className="flex h-16 items-center px-5">
-          <LogoMark wordmark="SAN Admin" />
+          <LogoMark wordmark="Syndran Admin" />
         </Link>
         <nav className="flex flex-1 flex-col gap-1 px-3">
           {SIDEBAR_NAV.map((item) => {

@@ -8,17 +8,17 @@ export interface WelcomeProps {
 
 const COPY: Record<WelcomeProps["role"], { title: string; body: string; cta: string }> = {
   admin: {
-    title: "Welcome to SAN",
+    title: "Welcome to Syndran",
     body: "Your admin console is ready.",
     cta: "Open admin console",
   },
   ambassador: {
-    title: "Welcome to SAN",
+    title: "Welcome to Syndran",
     body: "Complete your profile, claim your slug, and pick your first opportunity to promote.",
     cta: "Complete onboarding",
   },
   syndicator: {
-    title: "Welcome to SAN",
+    title: "Welcome to Syndran",
     body: "Browse vetted opportunities and track your portfolio from your dashboard.",
     cta: "Open dashboard",
   },

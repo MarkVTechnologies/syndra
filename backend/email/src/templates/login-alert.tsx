@@ -18,7 +18,7 @@ export default function LoginAlert({
   killSessionUrl,
 }: LoginAlertProps) {
   return (
-    <EmailLayout preview="New sign-in to your SAN account">
+    <EmailLayout preview="New sign-in to your Syndran account">
       <Text style={{ fontSize: 20, fontWeight: 700, color: emailColors.obsidian900 }}>
         New sign-in detected
       </Text>

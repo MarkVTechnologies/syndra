@@ -196,7 +196,7 @@ async function main() {
         approvedAt: new Date(),
       });
     }
-    console.log(`  ${a.email}  (san.com/${a.slug})`);
+    console.log(`  ${a.email}  (syndran.com/${a.slug})`);
   }
 
   console.log("\n=== Investors (syndicators) ===");
@@ -254,7 +254,7 @@ async function main() {
         createdBy: admin?._id ?? undefined,
       });
     }
-    console.log(`  ${p.title}  (san.com/opportunities/${p.slug})`);
+    console.log(`  ${p.title}  (syndran.com/opportunities/${p.slug})`);
   }
 
   console.log(`\nAll seeded accounts share the password: ${PASSWORD}`);

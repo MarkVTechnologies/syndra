@@ -18,12 +18,12 @@ export default function WaitlistConfirmed({
 }: WaitlistConfirmedProps) {
   const firstName = fullName.split(" ")[0];
   return (
-    <EmailLayout preview={`You're #${position} on the SAN ambassador waitlist`}>
+    <EmailLayout preview={`You're #${position} on the Syndran ambassador waitlist`}>
       <Text style={{ fontSize: 20, fontWeight: 700, color: emailColors.obsidian900 }}>
         You&apos;re on the list, {firstName}.
       </Text>
       <Text style={{ fontSize: 15, lineHeight: "24px", color: emailColors.slate600 }}>
-        Thanks for joining the SAN ambassador waitlist. You are number{" "}
+        Thanks for joining the Syndran ambassador waitlist. You are number{" "}
         <strong style={{ color: emailColors.brass500 }}>{position}</strong> in line.
       </Text>
 
@@ -47,12 +47,12 @@ export default function WaitlistConfirmed({
             fontFamily: "monospace",
           }}
         >
-          san.com/{reservedSlug}
+          syndran.com/{reservedSlug}
         </Text>
       </Section>
 
       <Text style={{ fontSize: 15, lineHeight: "24px", color: emailColors.slate600 }}>
-        When SAN launches, we&apos;ll send you a direct login link — no
+        When Syndran launches, we&apos;ll send you a direct login link — no
         re-registration needed. In the meantime, refer other realtors to move up
         the line.
       </Text>

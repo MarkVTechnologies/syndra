@@ -170,7 +170,7 @@ export function OpportunityBuilder({
                   })}
                 />
               </FormField>
-              <FormField label="Slug" htmlFor="slug" required error={errors.slug?.message} hint="san.com/opportunities/slug">
+              <FormField label="Slug" htmlFor="slug" required error={errors.slug?.message} hint="syndran.com/opportunities/slug">
                 <Input
                   id="slug"
                   className="font-mono"

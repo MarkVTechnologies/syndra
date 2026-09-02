@@ -3,7 +3,7 @@ import { Container } from "@/components/layout/container";
 import { Stagger, StaggerItem, ScrollReveal } from "./scroll-reveal";
 
 const benefits = [
-  { icon: Globe, title: "Personal microsite", body: "san.com/yourname — yours, always." },
+  { icon: Globe, title: "Personal microsite", body: "syndran.com/yourname — yours, always." },
   { icon: LayoutGrid, title: "Curated deal inventory", body: "Only vetted, admin-published opportunities." },
   { icon: Target, title: "Automatic attribution", body: "Every referral is tracked and provably yours." },
   { icon: LineChart, title: "Real-time earnings dashboard", body: "Views, referrals and commission in one place." },

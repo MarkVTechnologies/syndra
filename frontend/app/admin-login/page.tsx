@@ -31,7 +31,7 @@ export default function AdminLoginPage() {
       <div aria-hidden className="texture-ledger-contained-dark pointer-events-none absolute inset-0" />
 
       <div className="glass-panel-dark relative w-full max-w-[400px] rounded-2xl p-8">
-        <LogoMark wordmark="SAN Admin" />
+        <LogoMark wordmark="Syndran Admin" />
         <h1 className="mt-4 text-xl font-semibold text-foreground">Admin sign in</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Restricted to administrator accounts.

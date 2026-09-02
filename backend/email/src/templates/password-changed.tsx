@@ -7,7 +7,7 @@ export interface PasswordChangedProps {
 
 export default function PasswordChanged({ revokeAllUrl }: PasswordChangedProps) {
   return (
-    <EmailLayout preview="Your SAN password was changed">
+    <EmailLayout preview="Your Syndran password was changed">
       <Text style={{ fontSize: 20, fontWeight: 700, color: emailColors.obsidian900 }}>
         Password changed
       </Text>

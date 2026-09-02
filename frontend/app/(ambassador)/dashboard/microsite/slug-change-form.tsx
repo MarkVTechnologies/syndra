@@ -30,10 +30,10 @@ export function SlugChangeForm({ currentSlug }: { currentSlug: string }) {
     <form onSubmit={onSubmit} className="mt-3 flex gap-2">
       <div className="relative flex-1">
         <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-          san.com/
+          syndran.com/
         </span>
         <Input
-          className="pl-[62px] font-mono"
+          className="pl-[96px] font-mono"
           value={slug}
           onChange={(e) => setSlug(e.target.value.toLowerCase())}
         />

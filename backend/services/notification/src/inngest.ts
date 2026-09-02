@@ -36,7 +36,7 @@ export const sendWaitlistConfirmed = inngest.createFunction(
     await sendEmail({
       to: email,
       template: "waitlist-confirmed",
-      subject: `You're #${position} on the SAN ambassador waitlist`,
+      subject: `You're #${position} on the Syndran ambassador waitlist`,
       element: WaitlistConfirmed({
         fullName,
         position,
@@ -77,7 +77,7 @@ export const sendWelcome = inngest.createFunction(
     await sendEmail({
       to: email,
       template: "welcome",
-      subject: "Welcome to SAN",
+      subject: "Welcome to Syndran",
       element: Welcome({ role, dashboardUrl }),
       idempotencyKey: `welcome:${userId}`,
       relatedTo: { type: "user", id: userId },
@@ -95,7 +95,7 @@ export const sendLoginAlert = inngest.createFunction(
     await sendEmail({
       to: email,
       template: "login-alert",
-      subject: "New sign-in to your SAN account",
+      subject: "New sign-in to your Syndran account",
       element: LoginAlert({ deviceLabel, ip, geo, timestamp, killSessionUrl }),
       // Idempotent per login instant, not per user — every login gets its own alert.
       idempotencyKey: `login-alert:${userId}:${timestamp}`,
@@ -147,7 +147,7 @@ export const sendSyndicatorWelcome = inngest.createFunction(
     await sendEmail({
       to: email,
       template: "syndicator-welcome",
-      subject: "Welcome to SAN",
+      subject: "Welcome to Syndran",
       element: SyndicatorWelcome({ dashboardUrl, ambassador }),
       idempotencyKey: `syndicator-welcome:${syndicatorId}`,
       relatedTo: { type: "syndicator", id: syndicatorId },
@@ -181,7 +181,7 @@ export const sendAmbassadorApproved = inngest.createFunction(
     await sendEmail({
       to: ambassadorEmail,
       template: "ambassador-approved",
-      subject: "You're live on SAN",
+      subject: "You're live on Syndran",
       element: AmbassadorApproved({ fullName, micrositeUrl }),
       idempotencyKey: `ambassador-approved:${slug}`,
       relatedTo: { type: "ambassador", id: slug },
@@ -304,7 +304,7 @@ export const sendAccountLocked = inngest.createFunction(
     await sendEmail({
       to: email,
       template: "account-locked",
-      subject: "Your SAN account was temporarily locked",
+      subject: "Your Syndran account was temporarily locked",
       element: AccountLocked({ ip, unlocksInMinutes }),
       idempotencyKey: `account-locked:${email}:${ip}:${new Date().toISOString().slice(0, 13)}`, // dedupes retries within the same hour
       relatedTo: { type: "user", id: email },
@@ -321,7 +321,7 @@ export const sendLaunchInvite = inngest.createFunction(
     await sendEmail({
       to: email,
       template: "launch-invite",
-      subject: "We're live — your SAN page is ready",
+      subject: "We're live — your Syndran page is ready",
       element: LaunchInvite({ fullName, reservedSlug, loginUrl }),
       idempotencyKey: `launch-invite:${waitlistId}`,
       relatedTo: { type: "waitlist", id: waitlistId },

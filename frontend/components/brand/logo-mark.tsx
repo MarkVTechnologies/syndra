@@ -2,7 +2,7 @@ import { ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
- * The one SAN brand mark, used identically everywhere — marketing header,
+ * The one Syndran brand mark, used identically everywhere — marketing header,
  * admin/ambassador/syndicator shells, admin-login. Previously each surface
  * hand-rolled its own logo markup with slightly different treatment; this
  * is what "consistent brand across board" actually enforces in code rather
@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  */
 export function LogoMark({
   size = "md",
-  wordmark = "SAN",
+  wordmark = "Syndran",
   className,
   textClassName,
 }: {

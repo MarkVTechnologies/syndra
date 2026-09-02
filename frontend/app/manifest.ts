@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Syndicators Ambassadors Network",
-    short_name: "SAN",
+    name: "Syndran — Syndicators Ambassadors Network",
+    short_name: "Syndran",
     description: "Earn recurring commission distributing vetted real-estate syndication deals.",
     start_url: "/dashboard?source=pwa",
     scope: "/",

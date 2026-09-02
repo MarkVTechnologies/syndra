@@ -158,7 +158,7 @@ export function WaitlistTable({
             <div className="mt-3 flex flex-wrap gap-1.5">
               <Badge>{r.city}, {r.state}</Badge>
               <Badge>{r.yearsExperience} yrs</Badge>
-              <Badge variant="brass">san.com/{r.desiredSlug}</Badge>
+              <Badge variant="brass">syndran.com/{r.desiredSlug}</Badge>
             </div>
           </div>
         ))}

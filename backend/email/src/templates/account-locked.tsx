@@ -9,7 +9,7 @@ export interface AccountLockedProps {
 /** PRD §12.1 brute-force control: alert on the transition into a lockout. */
 export default function AccountLocked({ ip, unlocksInMinutes }: AccountLockedProps) {
   return (
-    <EmailLayout preview="Your SAN account was temporarily locked">
+    <EmailLayout preview="Your Syndran account was temporarily locked">
       <Text style={{ fontSize: 20, fontWeight: 700, color: emailColors.obsidian900 }}>
         Account temporarily locked
       </Text>

@@ -72,7 +72,7 @@ export function EmailLayout({
                 letterSpacing: "-0.01em",
               }}
             >
-              SAN
+              Syndran
             </Text>
             <Text style={{ color: colors.slate200, fontSize: 12, margin: "2px 0 0" }}>
               Syndicators Ambassadors Network
@@ -84,10 +84,10 @@ export function EmailLayout({
           <Hr style={{ borderColor: colors.slate200, margin: 0 }} />
           <Section style={{ padding: "20px 32px" }}>
             <Text style={{ color: colors.slate600, fontSize: 12, lineHeight: "18px" }}>
-              You are receiving this because you have an account with SAN. If this
+              You are receiving this because you have an account with Syndran. If this
               wasn&apos;t you, contact{" "}
-              <Link href="mailto:support@san.com" style={{ color: colors.emerald600 }}>
-                support@san.com
+              <Link href="mailto:support@syndran.com" style={{ color: colors.emerald600 }}>
+                support@syndran.com
               </Link>
               .
             </Text>

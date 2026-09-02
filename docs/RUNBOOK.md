@@ -1,6 +1,6 @@
-# SAN Operational Runbook
+# Syndran Operational Runbook
 
-Operational procedures for running SAN in production. This is not a design
+Operational procedures for running Syndran in production. This is not a design
 doc — it assumes you've read `README.md` for architecture and points at PRD
 sections for the "why." Written for whoever is on call, including a future
 version of the person who built this.
@@ -58,9 +58,9 @@ admin action, not a deploy step.
 2. Confirm Resend, Turnstile (production keys, not test keys), Paystack,
    and Cloudinary are all configured with **production** credentials — the
    CI env block and any preview deployment use placeholder/test values.
-3. Log in as admin → `/admin/waitlist` → **Launch SAN** panel. It shows the
+3. Log in as admin → `/admin/waitlist` → **Launch Syndran** panel. It shows the
    exact count of waitlist registrants who will be emailed.
-4. Type `LAUNCH SAN` exactly to enable the confirm button, then confirm.
+4. Type `LAUNCH SYNDRAN` exactly to enable the confirm button, then confirm.
    This, in order:
    - flips `settings.appLaunched` to `true` (`setAppLaunched()`, `@san/db`),
    - issues each pending registrant a 14-day single-use login token
@@ -161,7 +161,7 @@ Playwright suite covering the golden paths (waitlist registration, login +
 RBAC, the launch confirmation gate, automated accessibility checks). It
 deliberately never spins up its own database — there's no local-Mongo path
 in this architecture (§1) — so it always runs against a real, already-live
-SAN instance.
+Syndran instance.
 
 - **Local**: `pnpm test:e2e:install` once (installs Chromium + WebKit),
   then `pnpm test:e2e` against a local `next dev` (needs a real `.env` with

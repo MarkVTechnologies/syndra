@@ -7,7 +7,7 @@ export interface VerifyEmailProps {
 
 export default function VerifyEmail({ verifyUrl }: VerifyEmailProps) {
   return (
-    <EmailLayout preview="Verify your email to activate your SAN account">
+    <EmailLayout preview="Verify your email to activate your Syndran account">
       <Text style={{ fontSize: 20, fontWeight: 700, color: emailColors.obsidian900 }}>
         Verify your email
       </Text>

@@ -6,7 +6,7 @@ const steps = [
   {
     icon: Link2,
     title: "Get your personal deal page",
-    body: "A branded microsite at san.com/yourname, live the moment you sign up.",
+    body: "A branded microsite at syndran.com/yourname, live the moment you sign up.",
   },
   {
     icon: Share2,

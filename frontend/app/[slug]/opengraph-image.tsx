@@ -7,7 +7,7 @@ export const contentType = "image/png";
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const result = await ambassador.getMicrosite(slug);
-  const name = result.ok ? result.data.ambassador.fullName : "SAN Ambassador";
+  const name = result.ok ? result.data.ambassador.fullName : "Syndran Ambassador";
   const headline = result.ok
     ? result.data.ambassador.headline
     : "Vetted real-estate syndication deals";
@@ -28,7 +28,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         }}
       >
         <div style={{ fontSize: 28, fontWeight: 700, color: "#D4AF37", letterSpacing: -0.5, display: "flex" }}>
-          SAN
+          Syndran
         </div>
         <div
           style={{

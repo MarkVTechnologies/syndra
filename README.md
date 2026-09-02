@@ -1,4 +1,4 @@
-# SAN — Syndicators Ambassadors Network
+# Syndran — Syndicators Ambassadors Network
 
 A real-estate syndication distribution platform: admin-published investment
 opportunities, a network of ambassador-realtors with personal marketing
@@ -228,7 +228,7 @@ real MongoDB transaction (requires a replica set — Atlas M10, per PRD §1.2
   typed-amount-confirmation flow rather than replacing it — mass one-click
   mark-paid was deliberately not built, since it would remove the audit
   trail's main safety control for money leaving the platform.
-- **Launch flow** (PRD §13.4): `/admin/waitlist` gets a **Launch SAN**
+- **Launch flow** (PRD §13.4): `/admin/waitlist` gets a **Launch Syndran**
   panel requiring the admin to type an exact confirmation phrase before
   the (irreversible, one-way) broadcast fires. `launchAndBroadcast()`
   flips `settings.appLaunched` and emails every pending waitlist row a

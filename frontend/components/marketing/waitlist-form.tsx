@@ -278,16 +278,16 @@ export function WaitlistForm() {
                   htmlFor="desiredSlug"
                   required
                   error={errors.desiredSlug?.message}
-                  hint={desiredSlug ? undefined : "This becomes san.com/yourname"}
+                  hint={desiredSlug ? undefined : "This becomes syndran.com/yourname"}
                 >
                   <div className="relative">
                     <Link2 className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" strokeWidth={1.75} />
                     <span className="pointer-events-none absolute left-10 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-                      san.com/
+                      syndran.com/
                     </span>
                     <Input
                       id="desiredSlug"
-                      className="pl-[104px] pr-9 font-mono"
+                      className="pl-[138px] pr-9 font-mono"
                       invalid={!!errors.desiredSlug}
                       {...register("desiredSlug")}
                     />
@@ -380,7 +380,7 @@ function SuccessPanel({
 
   const share = async () => {
     if (navigator.share) {
-      await navigator.share({ title: "Join me on SAN", url: fullShareUrl }).catch(() => {});
+      await navigator.share({ title: "Join me on Syndran", url: fullShareUrl }).catch(() => {});
     } else {
       copy();
     }
@@ -405,7 +405,7 @@ function SuccessPanel({
         <Link2 className="size-4 shrink-0 text-[var(--estate-rust-700)]" strokeWidth={1.75} />
         <div>
           <p className="text-xs text-muted-foreground">Your reserved microsite</p>
-          <p className="mt-0.5 font-mono text-sm font-semibold text-[var(--estate-rust-700)]">san.com/{reservedSlug}</p>
+          <p className="mt-0.5 font-mono text-sm font-semibold text-[var(--estate-rust-700)]">syndran.com/{reservedSlug}</p>
         </div>
       </div>
 

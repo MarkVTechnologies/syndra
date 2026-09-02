@@ -11,18 +11,18 @@ export interface LaunchInviteProps {
 export default function LaunchInvite({ fullName, reservedSlug, loginUrl }: LaunchInviteProps) {
   const firstName = fullName.split(" ")[0];
   return (
-    <EmailLayout preview="SAN is live — your page is ready">
+    <EmailLayout preview="Syndran is live — your page is ready">
       <Text style={{ fontSize: 20, fontWeight: 700, color: emailColors.obsidian900 }}>
         We&apos;re live, {firstName}
       </Text>
       <Text style={{ fontSize: 15, lineHeight: "24px", color: emailColors.slate600 }}>
-        SAN has launched. Your reserved microsite is ready — log in with the
+        Syndran has launched. Your reserved microsite is ready — log in with the
         password you set to activate it.
       </Text>
       <Section style={{ backgroundColor: "#FAF3DC", borderRadius: 12, padding: "16px 20px", margin: "20px 0" }}>
         <Text style={{ fontSize: 12, color: emailColors.slate600, margin: 0 }}>Your reserved microsite</Text>
         <Text style={{ fontSize: 16, fontWeight: 700, color: emailColors.obsidian900, margin: "4px 0 0", fontFamily: "monospace" }}>
-          san.com/{reservedSlug}
+          syndran.com/{reservedSlug}
         </Text>
       </Section>
       <Button
