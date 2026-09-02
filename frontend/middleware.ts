@@ -129,7 +129,18 @@ export default auth(async (req) => {
 });
 
 export const config = {
+  // /api/auth/* must stay excluded: Auth.js's own route handlers (auth.ts)
+  // already manage session/CSRF cookies internally. Wrapping them in this
+  // middleware's auth() a second time made both layers independently mint
+  // a fresh CSRF token on the same request — confirmed via curl showing
+  // the /api/auth/csrf response carrying two different
+  // Set-Cookie: __Host-authjs.csrf-token headers with different values,
+  // one matching the JSON body, the other winning as the actual browser
+  // cookie. Every credentials sign-in intermittently failed with
+  // MissingCSRF depending on which value survived, while silently leaving
+  // any prior session cookie in place — no visible error, just a login
+  // that appears to do nothing.
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|sw.js|manifest.webmanifest|icons/).*)",
+    "/((?!api/auth|_next/static|_next/image|favicon.ico|sw.js|manifest.webmanifest|icons/).*)",
   ],
 };
