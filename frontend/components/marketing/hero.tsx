@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { CountUp } from "@/components/ui/count-up";
@@ -19,10 +20,6 @@ export function Hero({ registeredCount }: { registeredCount: number }) {
   const meshY = useParallaxTransform(scrollYProgress, "35%");
   const contentY = useParallaxTransform(scrollYProgress, "12%");
   const fade = useParallaxFade(scrollYProgress);
-
-  const scrollToForm = () => {
-    document.getElementById("waitlist-form")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section
@@ -97,12 +94,14 @@ export function Hero({ registeredCount }: { registeredCount: number }) {
           className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
         >
           <Button
+            asChild
             size="lg"
-            onClick={scrollToForm}
             className="sweep relative w-full overflow-hidden shadow-[0_8px_28px_-6px_rgba(192,88,0,0.65)] sm:w-auto"
           >
-            Join the Ambassador Waitlist
-            <ArrowRight />
+            <Link href="/signup">
+              Become an Ambassador
+              <ArrowRight />
+            </Link>
           </Button>
           <div className="glass-panel-dark flex items-center gap-2.5 rounded-full px-4 py-2 text-sm text-[var(--estate-sand-300)]">
             <span className="relative flex size-2">

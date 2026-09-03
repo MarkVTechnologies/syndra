@@ -30,6 +30,12 @@ export interface CreateProfileInput {
   slug: string;
 }
 
+/** Total registered ambassadors — public trust-signal stat on the marketing homepage. */
+export async function getCount(): Promise<number> {
+  await connectDb();
+  return AmbassadorModel.countDocuments({});
+}
+
 export async function createProfile(input: CreateProfileInput): Promise<Result<AmbassadorDoc>> {
   await connectDb();
 

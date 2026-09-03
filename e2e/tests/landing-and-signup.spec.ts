@@ -1,7 +1,9 @@
 import { test, expect } from "@playwright/test";
 
 /**
- * PRD §14 Day 5 Block 4 golden path: Phase 0 waitlist registration.
+ * The app is launched — no waitlist. The homepage's "Get started" section
+ * links straight to real registration at /signup, which is what this
+ * suite exercises end to end.
  *
  * Requires the preview/target env's NEXT_PUBLIC_TURNSTILE_SITE_KEY to be set
  * to Cloudflare's documented always-pass test key
@@ -10,21 +12,30 @@ import { test, expect } from "@playwright/test";
  */
 
 test.describe("Landing page", () => {
-  test("renders hero, waitlist count, and the registration form", async ({ page }) => {
+  test("renders hero and the get-started CTA", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(page.locator("#waitlist-form")).toBeVisible();
+    await expect(page.locator("#get-started")).toBeVisible();
+    await expect(page.getByRole("link", { name: /become an ambassador/i }).first()).toBeVisible();
   });
 
-  test("waitlist form rejects an invalid submission before hitting the server", async ({ page }) => {
-    await page.goto("/#waitlist-form");
-    await page.getByRole("button", { name: /join the waitlist/i }).click();
+  test("hero CTA navigates straight to signup, no waitlist", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("link", { name: /become an ambassador/i }).first().click();
+    await expect(page).toHaveURL(/\/signup/);
+  });
+});
+
+test.describe("Signup", () => {
+  test("rejects an invalid submission before hitting the server", async ({ page }) => {
+    await page.goto("/signup");
+    await page.getByRole("button", { name: /create account/i }).click();
     await expect(page.getByText(/required|enter a valid/i).first()).toBeVisible();
   });
 
-  test("a unique registrant completes the waitlist flow and gets a reserved slug", async ({ page }) => {
+  test("a unique registrant completes real signup and is asked to verify their email", async ({ page }) => {
     const stamp = Date.now();
-    await page.goto("/#waitlist-form");
+    await page.goto("/signup");
 
     await page.getByLabel("Full name").fill("Ada E2E Test");
     await page.getByLabel("Email").fill(`ada.e2e.${stamp}@example.com`);
@@ -38,8 +49,8 @@ test.describe("Landing page", () => {
     await page.getByLabel("Password").fill("correct horse battery staple");
     await page.getByLabel(/i agree to the/i).check();
 
-    await page.getByRole("button", { name: /join the waitlist/i }).click();
+    await page.getByRole("button", { name: /create account/i }).click();
 
-    await expect(page.getByText(/you're on the list/i)).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText(/check your email/i)).toBeVisible({ timeout: 15_000 });
   });
 });

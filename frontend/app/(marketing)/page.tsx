@@ -4,12 +4,12 @@ import { HowItWorks } from "@/components/marketing/how-it-works";
 import { Benefits } from "@/components/marketing/benefits";
 import { OpportunityPreview } from "@/components/marketing/opportunity-preview";
 import { CommissionSlider } from "@/components/marketing/commission-slider";
-import { WaitlistForm } from "@/components/marketing/waitlist-form";
+import { GetStartedCta } from "@/components/marketing/get-started-cta";
 import { FAQ } from "@/components/marketing/faq";
 import { Footer } from "@/components/marketing/footer";
-import { getWaitlistCount } from "@/lib/waitlist-count";
+import { getAmbassadorCount } from "@/lib/ambassador-count";
 
-const getCachedCount = unstable_cache(getWaitlistCount, ["waitlist-count"], {
+const getCachedCount = unstable_cache(getAmbassadorCount, ["ambassador-count"], {
   revalidate: 60,
 });
 
@@ -34,7 +34,7 @@ export default async function LandingPage() {
       <Benefits />
       <OpportunityPreview />
       <CommissionSlider />
-      <WaitlistForm />
+      <GetStartedCta />
       <FAQ />
       <Footer />
     </>
