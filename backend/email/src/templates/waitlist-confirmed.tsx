@@ -53,7 +53,7 @@ export default function WaitlistConfirmed({
 
       <Text style={{ fontSize: 15, lineHeight: "24px", color: emailColors.slate600 }}>
         When Syndran launches, we&apos;ll send you a direct login link — no
-        re-registration needed. In the meantime, refer other realtors to move up
+        re-registration needed. In the meantime, refer other ambassadors to move up
         the line.
       </Text>
 

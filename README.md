@@ -1,7 +1,7 @@
 # Syndran — Syndicators Ambassadors Network
 
 A real-estate syndication distribution platform: admin-published investment
-opportunities, a network of ambassador-realtors with personal marketing
+opportunities, a network of ambassadors with personal marketing
 microsites, and attributed syndicator investors with automated commission
 accrual. Build spec: `SAN-Engineering-PRD-v1.0.docx` (referenced throughout
 this codebase as "PRD §X").
